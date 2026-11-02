@@ -1,0 +1,373 @@
+{
+ "seed": 2001,
+ "tasks": {
+  "1": {
+   "instruction": "pick up the black bowl next to the ramekin and place it on the plate",
+   "episodes": [
+    {
+     "episode": 0,
+     "arms": {
+      "pretrained": {
+       "file": "rollouts/pretrained_t1_e0.mp4",
+       "success": false
+      },
+      "lora_s0": {
+       "file": "rollouts/lora_s0_t1_e0.mp4",
+       "success": true
+      },
+      "lora_s1": {
+       "file": "rollouts/lora_s1_t1_e0.mp4",
+       "success": true
+      }
+     }
+    },
+    {
+     "episode": 1,
+     "arms": {
+      "pretrained": {
+       "file": "rollouts/pretrained_t1_e1.mp4",
+       "success": true
+      },
+      "lora_s0": {
+       "file": "rollouts/lora_s0_t1_e1.mp4",
+       "success": true
+      },
+      "lora_s1": {
+       "file": "rollouts/lora_s1_t1_e1.mp4",
+       "success": false
+      }
+     }
+    },
+    {
+     "episode": 2,
+     "arms": {
+      "pretrained": {
+       "file": "rollouts/pretrained_t1_e2.mp4",
+       "success": true
+      },
+      "lora_s0": {
+       "file": "rollouts/lora_s0_t1_e2.mp4",
+       "success": true
+      },
+      "lora_s1": {
+       "file": "rollouts/lora_s1_t1_e2.mp4",
+       "success": true
+      }
+     }
+    }
+   ]
+  },
+  "3": {
+   "instruction": "pick up the black bowl on the cookie box and place it on the plate",
+   "episodes": [
+    {
+     "episode": 0,
+     "arms": {
+      "pretrained": {
+       "file": "rollouts/pretrained_t3_e0.mp4",
+       "success": true
+      },
+      "lora_s0": {
+       "file": "rollouts/lora_s0_t3_e0.mp4",
+       "success": true
+      },
+      "lora_s1": {
+       "file": "rollouts/lora_s1_t3_e0.mp4",
+       "success": true
+      }
+     }
+    },
+    {
+     "episode": 1,
+     "arms": {
+      "pretrained": {
+       "file": "rollouts/pretrained_t3_e1.mp4",
+       "success": true
+      },
+      "lora_s0": {
+       "file": "rollouts/lora_s0_t3_e1.mp4",
+       "success": true
+      },
+      "lora_s1": {
+       "file": "rollouts/lora_s1_t3_e1.mp4",
+       "success": true
+      }
+     }
+    },
+    {
+     "episode": 2,
+     "arms": {
+      "pretrained": {
+       "file": "rollouts/pretrained_t3_e2.mp4",
+       "success": false
+      },
+      "lora_s0": {
+       "file": "rollouts/lora_s0_t3_e2.mp4",
+       "success": false
+      },
+      "lora_s1": {
+       "file": "rollouts/lora_s1_t3_e2.mp4",
+       "success": true
+      }
+     }
+    }
+   ]
+  },
+  "5": {
+   "instruction": "pick up the black bowl on the ramekin and place it on the plate",
+   "episodes": [
+    {
+     "episode": 0,
+     "arms": {
+      "pretrained": {
+       "file": "rollouts/pretrained_t5_e0.mp4",
+       "success": false
+      },
+      "lora_s0": {
+       "file": "rollouts/lora_s0_t5_e0.mp4",
+       "success": false
+      },
+      "lora_s1": {
+       "file": "rollouts/lora_s1_t5_e0.mp4",
+       "success": false
+      }
+     }
+    },
+    {
+     "episode": 1,
+     "arms": {
+      "pretrained": {
+       "file": "rollouts/pretrained_t5_e1.mp4",
+       "success": false
+      },
+      "lora_s0": {
+       "file": "rollouts/lora_s0_t5_e1.mp4",
+       "success": false
+      },
+      "lora_s1": {
+       "file": "rollouts/lora_s1_t5_e1.mp4",
+       "success": false
+      }
+     }
+    },
+    {
+     "episode": 2,
+     "arms": {
+      "pretrained": {
+       "file": "rollouts/pretrained_t5_e2.mp4",
+       "success": false
+      },
+      "lora_s0": {
+       "file": "rollouts/lora_s0_t5_e2.mp4",
+       "success": false
+      },
+      "lora_s1": {
+       "file": "rollouts/lora_s1_t5_e2.mp4",
+       "success": false
+      }
+     }
+    },
+    {
+     "episode": 3,
+     "arms": {
+      "pretrained": {
+       "file": "rollouts/pretrained_t5_e3.mp4",
+       "success": false
+      },
+      "lora_s0": {
+       "file": "rollouts/lora_s0_t5_e3.mp4",
+       "success": false
+      },
+      "lora_s1": {
+       "file": "rollouts/lora_s1_t5_e3.mp4",
+       "success": false
+      }
+     }
+    }
+   ]
+  },
+  "7": {
+   "instruction": "pick up the black bowl on the stove and place it on the plate",
+   "episodes": [
+    {
+     "episode": 0,
+     "arms": {
+      "pretrained": {
+       "file": "rollouts/pretrained_t7_e0.mp4",
+       "success": true
+      },
+      "lora_s0": {
+       "file": "rollouts/lora_s0_t7_e0.mp4",
+       "success": false
+      },
+      "lora_s1": {
+       "file": "rollouts/lora_s1_t7_e0.mp4",
+       "success": false
+      }
+     }
+    },
+    {
+     "episode": 1,
+     "arms": {
+      "pretrained": {
+       "file": "rollouts/pretrained_t7_e1.mp4",
+       "success": true
+      },
+      "lora_s0": {
+       "file": "rollouts/lora_s0_t7_e1.mp4",
+       "success": false
+      },
+      "lora_s1": {
+       "file": "rollouts/lora_s1_t7_e1.mp4",
+       "success": false
+      }
+     }
+    },
+    {
+     "episode": 2,
+     "arms": {
+      "pretrained": {
+       "file": "rollouts/pretrained_t7_e2.mp4",
+       "success": true
+      },
+      "lora_s0": {
+       "file": "rollouts/lora_s0_t7_e2.mp4",
+       "success": false
+      },
+      "lora_s1": {
+       "file": "rollouts/lora_s1_t7_e2.mp4",
+       "success": false
+      }
+     }
+    }
+   ]
+  }
+ },
+ "arms": {
+  "pretrained": "Pretrained",
+  "lora_s0": "LoRA (train seed 0)",
+  "lora_s1": "LoRA (train seed 1)"
+ },
+ "table": [
+  {
+   "arm": "lora_s0",
+   "task": 1,
+   "successes": 10,
+   "episodes": 10,
+   "ci95": [
+    0.7224598312333834,
+    1.0
+   ]
+  },
+  {
+   "arm": "lora_s0",
+   "task": 3,
+   "successes": 4,
+   "episodes": 10,
+   "ci95": [
+    0.16817758120350967,
+    0.6873304525498135
+   ]
+  },
+  {
+   "arm": "lora_s0",
+   "task": 5,
+   "successes": 39,
+   "episodes": 90,
+   "ci95": [
+    0.33576405263265097,
+    0.5363608898235731
+   ]
+  },
+  {
+   "arm": "lora_s0",
+   "task": 7,
+   "successes": 1,
+   "episodes": 10,
+   "ci95": [
+    0.01787574951572113,
+    0.4041563854975721
+   ]
+  },
+  {
+   "arm": "lora_s1",
+   "task": 1,
+   "successes": 5,
+   "episodes": 10,
+   "ci95": [
+    0.23658959361548731,
+    0.7634104063845126
+   ]
+  },
+  {
+   "arm": "lora_s1",
+   "task": 3,
+   "successes": 4,
+   "episodes": 10,
+   "ci95": [
+    0.16817758120350967,
+    0.6873304525498135
+   ]
+  },
+  {
+   "arm": "lora_s1",
+   "task": 5,
+   "successes": 43,
+   "episodes": 90,
+   "ci95": [
+    0.37761880660358116,
+    0.5797561742151601
+   ]
+  },
+  {
+   "arm": "lora_s1",
+   "task": 7,
+   "successes": 0,
+   "episodes": 10,
+   "ci95": [
+    -2.7755575615628914e-17,
+    0.2775401687666166
+   ]
+  },
+  {
+   "arm": "pretrained",
+   "task": 1,
+   "successes": 5,
+   "episodes": 10,
+   "ci95": [
+    0.23658959361548731,
+    0.7634104063845126
+   ]
+  },
+  {
+   "arm": "pretrained",
+   "task": 3,
+   "successes": 6,
+   "episodes": 10,
+   "ci95": [
+    0.3126695474501864,
+    0.8318224187964902
+   ]
+  },
+  {
+   "arm": "pretrained",
+   "task": 5,
+   "successes": 40,
+   "episodes": 90,
+   "ci95": [
+    0.3461548633017185,
+    0.5472825887451348
+   ]
+  },
+  {
+   "arm": "pretrained",
+   "task": 7,
+   "successes": 7,
+   "episodes": 10,
+   "ci95": [
+    0.39677321997956516,
+    0.892210712513788
+   ]
+  }
+ ]
+}

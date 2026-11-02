@@ -1,5 +1,39 @@
 {
  "rows": {
+  "lora_s0|task1": {
+   "successes": 10,
+   "episodes": 10,
+   "rate": 1.0,
+   "ci95_wilson": [
+    0.7224598312333834,
+    1.0
+   ],
+   "per_seed_rate": {
+    "2001": 1.0
+   },
+   "per_seed_successes": {
+    "2001": 10
+   },
+   "mean_of_seeds": 1.0,
+   "std_of_seeds": null
+  },
+  "lora_s0|task3": {
+   "successes": 4,
+   "episodes": 10,
+   "rate": 0.4,
+   "ci95_wilson": [
+    0.16817758120350967,
+    0.6873304525498135
+   ],
+   "per_seed_rate": {
+    "2001": 0.4
+   },
+   "per_seed_successes": {
+    "2001": 4
+   },
+   "mean_of_seeds": 0.4,
+   "std_of_seeds": null
+  },
   "lora_s0|task5": {
    "successes": 39,
    "episodes": 90,
@@ -20,6 +54,57 @@
    },
    "mean_of_seeds": 0.4333333333333333,
    "std_of_seeds": 0.057735026918962595
+  },
+  "lora_s0|task7": {
+   "successes": 1,
+   "episodes": 10,
+   "rate": 0.1,
+   "ci95_wilson": [
+    0.01787574951572113,
+    0.4041563854975721
+   ],
+   "per_seed_rate": {
+    "2001": 0.1
+   },
+   "per_seed_successes": {
+    "2001": 1
+   },
+   "mean_of_seeds": 0.1,
+   "std_of_seeds": null
+  },
+  "lora_s1|task1": {
+   "successes": 5,
+   "episodes": 10,
+   "rate": 0.5,
+   "ci95_wilson": [
+    0.23658959361548731,
+    0.7634104063845126
+   ],
+   "per_seed_rate": {
+    "2001": 0.5
+   },
+   "per_seed_successes": {
+    "2001": 5
+   },
+   "mean_of_seeds": 0.5,
+   "std_of_seeds": null
+  },
+  "lora_s1|task3": {
+   "successes": 4,
+   "episodes": 10,
+   "rate": 0.4,
+   "ci95_wilson": [
+    0.16817758120350967,
+    0.6873304525498135
+   ],
+   "per_seed_rate": {
+    "2001": 0.4
+   },
+   "per_seed_successes": {
+    "2001": 4
+   },
+   "mean_of_seeds": 0.4,
+   "std_of_seeds": null
   },
   "lora_s1|task5": {
    "successes": 43,
@@ -42,6 +127,57 @@
    "mean_of_seeds": 0.4777777777777778,
    "std_of_seeds": 0.13471506281091264
   },
+  "lora_s1|task7": {
+   "successes": 0,
+   "episodes": 10,
+   "rate": 0.0,
+   "ci95_wilson": [
+    -2.7755575615628914e-17,
+    0.2775401687666166
+   ],
+   "per_seed_rate": {
+    "2001": 0.0
+   },
+   "per_seed_successes": {
+    "2001": 0
+   },
+   "mean_of_seeds": 0.0,
+   "std_of_seeds": null
+  },
+  "pretrained|task1": {
+   "successes": 5,
+   "episodes": 10,
+   "rate": 0.5,
+   "ci95_wilson": [
+    0.23658959361548731,
+    0.7634104063845126
+   ],
+   "per_seed_rate": {
+    "2001": 0.5
+   },
+   "per_seed_successes": {
+    "2001": 5
+   },
+   "mean_of_seeds": 0.5,
+   "std_of_seeds": null
+  },
+  "pretrained|task3": {
+   "successes": 6,
+   "episodes": 10,
+   "rate": 0.6,
+   "ci95_wilson": [
+    0.3126695474501864,
+    0.8318224187964902
+   ],
+   "per_seed_rate": {
+    "2001": 0.6
+   },
+   "per_seed_successes": {
+    "2001": 6
+   },
+   "mean_of_seeds": 0.6,
+   "std_of_seeds": null
+  },
   "pretrained|task5": {
    "successes": 40,
    "episodes": 90,
@@ -62,9 +198,66 @@
    },
    "mean_of_seeds": 0.4444444444444445,
    "std_of_seeds": 0.0693888666488711
+  },
+  "pretrained|task7": {
+   "successes": 7,
+   "episodes": 10,
+   "rate": 0.7,
+   "ci95_wilson": [
+    0.39677321997956516,
+    0.892210712513788
+   ],
+   "per_seed_rate": {
+    "2001": 0.7
+   },
+   "per_seed_successes": {
+    "2001": 7
+   },
+   "mean_of_seeds": 0.7,
+   "std_of_seeds": null
   }
  },
  "diffs": {
+  "lora_s0-pretrained|task1": {
+   "diff": 0.5,
+   "ci95_bootstrap": [
+    0.19999999999999996,
+    0.8
+   ],
+   "per_seed_diff": {
+    "2001": 0.5
+   }
+  },
+  "lora_s1-pretrained|task1": {
+   "diff": 0.0,
+   "ci95_bootstrap": [
+    -0.4,
+    0.4
+   ],
+   "per_seed_diff": {
+    "2001": 0.0
+   }
+  },
+  "lora_s0-pretrained|task3": {
+   "diff": -0.19999999999999996,
+   "ci95_bootstrap": [
+    -0.6000000000000001,
+    0.2
+   ],
+   "per_seed_diff": {
+    "2001": -0.19999999999999996
+   }
+  },
+  "lora_s1-pretrained|task3": {
+   "diff": -0.19999999999999996,
+   "ci95_bootstrap": [
+    -0.6000000000000001,
+    0.2
+   ],
+   "per_seed_diff": {
+    "2001": -0.19999999999999996
+   }
+  },
   "lora_s0-pretrained|task5": {
    "diff": -0.011111111111111072,
    "ci95_bootstrap": [
@@ -87,6 +280,26 @@
     "2001": -0.09999999999999998,
     "3001": 0.03333333333333338,
     "4001": 0.16666666666666663
+   }
+  },
+  "lora_s0-pretrained|task7": {
+   "diff": -0.6,
+   "ci95_bootstrap": [
+    -0.9,
+    -0.2
+   ],
+   "per_seed_diff": {
+    "2001": -0.6
+   }
+  },
+  "lora_s1-pretrained|task7": {
+   "diff": -0.7,
+   "ci95_bootstrap": [
+    -1.0,
+    -0.4
+   ],
+   "per_seed_diff": {
+    "2001": -0.7
    }
   }
  }
