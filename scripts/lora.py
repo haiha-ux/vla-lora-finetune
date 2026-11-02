@@ -57,3 +57,9 @@ def param_counts(model: nn.Module) -> dict[str, int]:
     train = sum(p.numel() for p in model.parameters() if p.requires_grad)
     total = sum(p.numel() for p in model.parameters())
     return {"trainable": train, "total": total, "base_total": total - train}
+
+
+def zero_b_names(sd: dict[str, torch.Tensor]) -> list[str]:
+    """Adapter B matrices that are exactly zero. Legitimate only for layers whose output never reaches the loss
+    (SmolVLA's last VLM layer: its q_proj/o_proj outputs are unused by the action expert, so they get no gradient)."""
+    return [k for k, v in sd.items() if "lora_B" in k and not v.abs().any()]

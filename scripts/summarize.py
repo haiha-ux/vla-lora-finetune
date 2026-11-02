@@ -22,7 +22,7 @@ def load(pattern="logs/eval_*_s*/eval_info.json"):
     runs = defaultdict(dict)
     for f in sorted(glob.glob(pattern)):
         m = re.search(r"eval_(.+)_s(\d+)/", f)
-        arm, seed = m.group(1), int(m.group(2))
+        arm, seed = re.sub(r"_t\d+$", "", m.group(1)), int(m.group(2))
         for t in json.load(open(f))["per_task"]:
             runs[(arm, t["task_id"])][seed] = [int(bool(x)) for x in t["metrics"]["successes"]]
     return runs

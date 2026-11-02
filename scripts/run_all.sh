@@ -13,4 +13,9 @@ for ts in 0 1; do
     heavy $PY scripts/train.py lora_s$ts $TASK $ts $STEPS 16 2>&1 | grep -v Warn > logs/train_lora_s$ts.log; }
 done
 for ts in 0 1; do for s in $EVAL_SEEDS; do ev lora_s$ts $s $EPS ckpt/lora_s$ts/adapter.safetensors; done; done
+# forgetting check: other tasks, 10 episodes, one eval seed
+for t in $TASKS_EXTRA; do
+  ev pretrained_t$t 2001 10 "" $t
+  for ts in 0 1; do ev lora_s${ts}_t$t 2001 10 ckpt/lora_s$ts/adapter.safetensors $t; done
+done
 echo ALL_DONE

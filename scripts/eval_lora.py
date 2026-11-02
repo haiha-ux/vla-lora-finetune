@@ -13,7 +13,7 @@ sys.argv = ["lerobot-eval"] + sys.argv[1:]
 from safetensors import safe_open
 from safetensors.torch import load_file
 from lerobot.policies.smolvla.modeling_smolvla import SmolVLAPolicy
-from lora import inject_lora, load_lora_state_dict, param_counts
+from lora import inject_lora, load_lora_state_dict, param_counts, zero_b_names
 
 path = os.environ.get("LORA_ADAPTER")
 _orig = SmolVLAPolicy.from_pretrained.__func__
@@ -27,9 +27,13 @@ def _patched(cls, *a, **k):
         names = inject_lora(pol, r=int(meta["rank"]), alpha=float(meta["alpha"]))
         load_lora_state_dict(pol, load_file(path))
         pol.to("cuda")
-        nonzero = sum(float(m.lora_B.abs().sum() > 0) for m in pol.modules() if hasattr(m, "lora_B"))
-        assert nonzero == len(names), "adapter loaded but some LoRA B matrices are all zero"
-        print(f"[lora] active: {len(names)} wrapped layers, {nonzero} with non-zero B, {param_counts(pol)}", flush=True)
+        saved = load_file(path)
+        loaded = {k: v.detach().cpu() for k, v in pol.state_dict().items() if "lora_" in k}
+        assert all(torch.equal(loaded[k], saved[k].float()) for k in saved), "loaded adapter differs from the file"
+        dead = zero_b_names(saved)
+        assert all("layers.31.self_attn.q_proj" in k or "layers.31.self_attn.o_proj" in k for k in dead), f"unexpected zero B: {dead}"
+        nonzero = len(names) - len(dead)
+        print(f"[lora] active: {len(names)} wrapped layers, {nonzero} with non-zero B ({len(dead)} unused-layer zeros), {param_counts(pol)}", flush=True)
     else:
         print("[lora] none: pretrained checkpoint", flush=True)
     return pol

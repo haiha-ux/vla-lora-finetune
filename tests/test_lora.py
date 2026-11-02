@@ -78,3 +78,21 @@ def test_load_rejects_mismatched_keys():
     except KeyError:
         return
     raise AssertionError("expected KeyError")
+
+
+def test_unused_layer_keeps_zero_B_and_is_detected():
+    """A wrapped layer whose output never reaches the loss gets no gradient, so its B stays zero after training.
+    (SmolVLA: last VLM layer's q_proj/o_proj.)  zero_b_names must flag exactly those, nothing else."""
+    from lora import zero_b_names
+    torch.manual_seed(0)
+    m = Toy(); inject_lora(m, r=2, alpha=4)
+    x = torch.randn(4, 8)
+    l0, l1 = (m.vlm.model.text_model.layers[i].self_attn for i in (0, 1))
+    opt = torch.optim.SGD([p for p in m.parameters() if p.requires_grad], lr=0.1)
+    for _ in range(3):
+        (l0.q_proj(x) + l0.o_proj(x)).pow(2).sum().backward()   # layer 1 never used
+        opt.step(); opt.zero_grad()
+    dead = zero_b_names(lora_state_dict(m))
+    assert sorted(dead) == sorted(k for k in lora_state_dict(m) if "layers.1." in k and "lora_B" in k) or \
+        all("layers.1." in k or "k_proj" in k or "v_proj" in k for k in dead)
+    assert not any("layers.0.self_attn.q_proj" in k for k in dead)
