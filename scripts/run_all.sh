@@ -2,6 +2,8 @@
 # Full pipeline, resumable: every step is skipped when its output already exists. Run from the repo root:
 #   setsid nohup scripts/run_all.sh > logs/run_all.log 2>&1 &
 cd "$(dirname "$0")/.." && source scripts/env.sh
+set -eo pipefail   # a failed step stops the pipeline; ALL_DONE is only printed if every step succeeded
+TASKS_EXTRA=${TASKS_EXTRA:-"1 3 7"}
 mkdir -p logs results ckpt
 TASK=5; EPS=${EPS:-30}; STEPS=${STEPS:-3000}
 EVAL_SEEDS="2001 3001 4001"
