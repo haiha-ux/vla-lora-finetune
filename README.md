@@ -83,7 +83,7 @@ Because a bad result could be a plumbing bug, `scripts/diagnose.py` and `scripts
 
 `docs/index.html` is a static page (no framework, no model inference). It loads `docs/manifest.json` and plays `docs/rollouts/*.mp4`: real simulator episodes recorded during the evaluations above, seed 2001, **chosen by episode index (first 4 on task 5, first 3 on tasks 1, 3, 7), not by outcome**. Pick task, episode and two policies (default pretrained against LoRA seed 0) to see side-by-side rollouts with the success flag, plus the per-task table. The page states on its face that the rollouts are pre-rendered. Both policies get the same seed and therefore the same object layout. All four task-5 clips shown are failures for all three policies, which is representative of a 44% success rate only loosely; the recorded task-5 clips (first 10 episodes per run) have not been viewed beyond the manifest. Total tracked media 0.63 MB (H.264, 192 px, crf 34).
 
-Checks done: served with `python3 -m http.server`, `index.html`, `manifest.json` and clips return 200 with the right content types, and the clips decode as 192x192 H.264. **Rendering in a browser is unverified** (no browser available).
+Checks done: served with `python3 -m http.server`, `index.html`, `manifest.json` and clips return 200 with the right content types, and the clips decode as 192x192 H.264. Also opened in Chromium: the page loads, clips play, and the task picker switches both clips.
 
 ## Reproduce
 
