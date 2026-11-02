@@ -1,0 +1,8 @@
+{
+ "observation.images.image": 2.172065575917562,
+ "observation.images.image2": 2.360477924346924,
+ "action_max_abs_diff_after_gripper_conversion": 0.0,
+ "state_max_abs_diff": 0.0,
+ "loss_video_frames": 0.31790101528167725,
+ "loss_png_frames": 0.3236442804336548
+}
