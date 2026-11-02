@@ -1,0 +1,16 @@
+#!/bin/bash
+# Full pipeline, resumable: every step is skipped when its output already exists. Run from the repo root:
+#   setsid nohup scripts/run_all.sh > logs/run_all.log 2>&1 &
+cd "$(dirname "$0")/.." && source scripts/env.sh
+mkdir -p logs results ckpt
+TASK=5; EPS=${EPS:-30}; STEPS=${STEPS:-3000}
+EVAL_SEEDS="2001 3001 4001"
+ev() { [ -f logs/eval_$1_s$2/eval_info.json ] || scripts/run_eval.sh "$@"; }
+load() { uptime | sed 's/.*load average: \([0-9]*\).*/\1/'; }
+for s in $EVAL_SEEDS; do ev pretrained $s $EPS; done
+for ts in 0 1; do
+  [ -f ckpt/lora_s$ts/adapter.safetensors ] || { while [ "$(load)" -gt 30 ]; do sleep 60; done
+    heavy $PY scripts/train.py lora_s$ts $TASK $ts $STEPS 16 2>&1 | grep -v Warn > logs/train_lora_s$ts.log; }
+done
+for ts in 0 1; do for s in $EVAL_SEEDS; do ev lora_s$ts $s $EPS ckpt/lora_s$ts/adapter.safetensors; done; done
+echo ALL_DONE
