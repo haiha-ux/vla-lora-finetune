@@ -93,6 +93,7 @@ def test_unused_layer_keeps_zero_B_and_is_detected():
         (l0.q_proj(x) + l0.o_proj(x)).pow(2).sum().backward()   # layer 1 never used
         opt.step(); opt.zero_grad()
     dead = zero_b_names(lora_state_dict(m))
-    assert sorted(dead) == sorted(k for k in lora_state_dict(m) if "layers.1." in k and "lora_B" in k) or \
-        all("layers.1." in k or "k_proj" in k or "v_proj" in k for k in dead)
-    assert not any("layers.0.self_attn.q_proj" in k for k in dead)
+    # layer 0: q and o were used -> non-zero. k/v of layer 0 and every projection of layer 1 never reached the loss.
+    expect = {f"vlm.model.text_model.layers.{l}.self_attn.{p}_proj.lora_B" for l, p in
+              [(0, "k"), (0, "v"), (1, "q"), (1, "k"), (1, "v"), (1, "o")]}
+    assert {d for d in dead} == expect
