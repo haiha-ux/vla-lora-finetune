@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SmolVLA + LoRA on LIBERO-Spatial: recorded rollouts</title>
+<style>
+body{font-family:system-ui,sans-serif;max-width:900px;margin:1.5em auto;padding:0 1em;color:#222}
+.note{background:#fff6d6;border:1px solid #e0c96a;padding:.6em .9em;border-radius:6px}
+.row{display:flex;gap:1em;flex-wrap:wrap}.card{flex:1;min-width:230px}
+video{width:100%;background:#000;border-radius:6px}
+.ok{color:#0a7d2c;font-weight:600}.fail{color:#b3261e;font-weight:600}
+table{border-collapse:collapse;width:100%;font-size:.9em}td,th{border:1px solid #ccc;padding:.3em .5em;text-align:left}
+select,button{font-size:1em;margin:.2em .4em .2em 0}
+</style></head><body>
+<h1>SmolVLA with and without a LoRA adapter</h1>
+<p class="note"><b>These are pre-rendered rollouts.</b> The model does not run in your browser. Every clip is a real simulator episode recorded
+during the evaluation (same seed and same object layout for both policies), chosen by episode index, not by outcome; failures are included.
+The result of the study is a <b>null result</b>: see the table below and the README.</p>
+<div>
+ <label>Task <select id="task"></select></label>
+ <label>Episode <select id="ep"></select></label>
+ <label>Left <select id="a"></select></label>
+ <label>Right <select id="b"></select></label>
+ <button id="play">Play both</button>
+</div>
+<p id="instr"><b>Instruction:</b> <span id="text"></span></p>
+<div class="row">
+ <div class="card"><video id="va" muted loop playsinline controls></video><div id="la"></div></div>
+ <div class="card"><video id="vb" muted loop playsinline controls></video><div id="lb"></div></div>
+</div>
+<h2>Success per task (all recorded evaluation episodes)</h2>
+<table id="tbl"><thead><tr><th>Policy</th><th>Task</th><th>Successes</th><th>Rate</th><th>95% CI (Wilson)</th></tr></thead><tbody></tbody></table>
+<p>Task 5 is the target (90 episodes per policy: 3 evaluation seeds x 30). Other tasks are a small forgetting check (10 episodes each); too few to show small changes.</p>
+<script>
+let M;const $=id=>document.getElementById(id);
+function opt(sel,items){sel.innerHTML="";items.forEach(([v,t])=>{const o=document.createElement("option");o.value=v;o.textContent=t;sel.appendChild(o)})}
+function show(){
+  const t=M.tasks[$("task").value];$("text").textContent=t.instruction;
+  const e=t.episodes[+$("ep").value];
+  [["a","va","la"],["b","vb","lb"]].forEach(([s,v,l])=>{
+    const r=e.arms[$(s).value];
+    if(!r){$(v).removeAttribute("src");$(l).textContent="no recording";return}
+    $(v).src=r.file;$(l).innerHTML=M.arms[$(s).value]+": <span class='"+(r.success?"ok":"fail")+"'>"+(r.success?"success":"failure")+"</span>";});
+}
+function onTask(){opt($("ep"),M.tasks[$("task").value].episodes.map(e=>[e.episode,"episode "+e.episode]));show()}
+fetch("manifest.json").then(r=>r.json()).then(m=>{M=m;
+  opt($("task"),Object.keys(m.tasks).map(k=>[k,"task "+k+(k=="5"?" (target)":"")]));$("task").value="5";
+  const arms=Object.entries(m.arms);opt($("a"),arms);opt($("b"),arms);$("a").value="pretrained";$("b").value="lora_s0";
+  $("task").onchange=onTask;["ep","a","b"].forEach(i=>$(i).onchange=show);
+  $("play").onclick=()=>{$("va").currentTime=0;$("vb").currentTime=0;$("va").play();$("vb").play()};
+  const tb=document.querySelector("#tbl tbody");
+  m.table.sort((x,y)=>x.task-y.task||x.arm.localeCompare(y.arm)).forEach(r=>{const tr=document.createElement("tr");
+    tr.innerHTML=`<td>${m.arms[r.arm]||r.arm}</td><td>${r.task}</td><td>${r.successes}/${r.episodes}</td><td>${(100*r.successes/r.episodes).toFixed(1)}%</td><td>${(100*r.ci95[0]).toFixed(1)}-${(100*r.ci95[1]).toFixed(1)}</td>`;tb.appendChild(tr)});
+  onTask()});
+</script></body></html>
